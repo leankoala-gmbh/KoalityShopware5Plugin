@@ -1,0 +1,1 @@
+# KoalityShopware5Plugin

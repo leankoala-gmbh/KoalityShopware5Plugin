@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="../../../../engine/Shopware/Components/Plugin/schema/config.xsd">
+
+    <elements>
+        <element type="text">
+            <name>apiKey</name>
+            <label lang="de">koality.io API-Schlüssel (privat)</label>
+            <label lang="en">koality.io API key (private)</label>
+            <value>123</value>
+            <description lang="de">Dieser geheime Schlüssel muss in der Konfiguration in koality.io für dieses Plugin
+                eingetragen werden.
+            </description>
+            <description lang="en">The API key must be added to the koality.io configuration in the koality.io
+                backend.
+            </description>
+            <options>
+                <readOnly>true</readOnly>
+            </options>
+        </element>
+        <element type="number">
+            <name>ordersPerHourRushHour</name>
+            <label lang="de">Mindestanzahl an Bestellungen pro Stunde</label>
+            <label lang="en">Minimal number of orders per hour</label>
+            <value>1</value>
+            <description lang="de">Dieser geheime Schlüssel muss in der Konfiguration in koality.io für dieses Plugin
+                eingetragen werden.
+            </description>
+            <description lang="en">The API key must be added to the koality.io configuration in the koality.io
+                backend.
+            </description>
+            <options>
+                <minValue>0</minValue>
+            </options>
+        </element>
+
+        <element type="number">
+            <name>ordersPerHourNormal</name>
+            <label lang="de">Mindestanzahl an Bestellungen außerhalb der Hauptverkaufszeit</label>
+            <label lang="en">Minimal number of orders outsite the rush hour.</label>
+            <value>1</value>
+            <description lang="de">Dieser geheime Schlüssel muss in der Konfiguration in koality.io für dieses Plugin
+                eingetragen werden.
+            </description>
+            <description lang="en">The API key must be added to the koality.io configuration in the koality.io
+                backend.
+            </description>
+            <options>
+                <minValue>0</minValue>
+            </options>
+        </element>
+
+        <element type="time">
+            <name>rushHourBegin</name>
+            <label lang="de">Hauptverkaufszeit beginnt um</label>
+            <label lang="en">Minimal number of orders per hour</label>
+            <description lang="de">Dieser geheime Schlüssel muss in der Konfiguration in koality.io für dieses Plugin
+                eingetragen werden.
+            </description>
+            <description lang="en">The API key must be added to the koality.io configuration in the koality.io
+                backend.
+            </description>
+        </element>
+
+        <element type="time">
+            <name>rushHourEnd</name>
+            <label lang="de">Hauptverkaufszeit endet um</label>
+            <label lang="en">Minimal number of orders per hour</label>
+            <description lang="de">Dieser geheime Schlüssel muss in der Konfiguration in koality.io für dieses Plugin
+                eingetragen werden.
+            </description>
+            <description lang="en">The API key must be added to the koality.io configuration in the koality.io
+                backend.
+            </description>
+        </element>
+
+        <element type="boolean">
+            <name>includeWeekends</name>
+            <label lang="de">Wochenende einbeziehen</label>
+            <label lang="en">Minimal number of orders per hour</label>
+            <description lang="de">Dieser geheime Schlüssel muss in der Konfiguration in koality.io für dieses Plugin
+                eingetragen werden.
+            </description>
+            <description lang="en">The API key must be added to the koality.io configuration in the koality.io
+                backend.
+            </description>
+        </element>
+    </elements>
+
+</config>

@@ -65,7 +65,7 @@ class Shopware_Controllers_Frontend_Health extends Enlight_Controller_Action
 
         $this->collectors[] = new KoalityCollector_OrdersByHour($this->config, $modelManager);
         $this->collectors[] = new KoalityCollector_ActiveProducts($this->config, $modelManager);
-        $this->collectors[] = new KoalityCollector_UpdatablePlugins($this->config, $modelManager);
+        // $this->collectors[] = new KoalityCollector_UpdatablePlugins($this->config, $modelManager);
     }
 
     /**

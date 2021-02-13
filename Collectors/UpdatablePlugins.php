@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Class OrdersByHour
+ * Class UpdatablePlugins
  *
  * This collector takes care for the orders done within the last hour. It alerts if they fall
  * under a configured threshold.
@@ -11,19 +11,21 @@
  * @author Nils Langner <nils.langner@leankoala.com>
  * created 2021-02-12
  */
-class KoalityCollector_OrdersByHour extends KoalityCollector_BaseCollector
+class KoalityCollector_UpdatablePlugins extends KoalityCollector_BaseCollector
 {
-    const KEY_ORDERS_PER_RUSHHOUR = 'ordersPerHourRushHour';
-    const KEY_ORDERS_NORMAL = 'ordersPerHourNormal';
-    const KEY_INCLUDE_WEEKENDS = 'includeWeekends';
-    const KEY_RUSH_HOUR_BEGIN = 'rushHourBegin';
-    const KEY_RUSH_HOUR_END = 'rushHourEnd';
+    const KEY_ORDERS_PER_RUSHHOUR = 'updatablePlugins';
 
     /**
      * @inheritDoc
      */
     public function validate()
     {
+        $this->refreshPlugins();
+
+        $updatablePlugins = $this->getUpdatablePlugins();
+
+        return;
+
         $orderCount = $this->getOrderCount();
         $orderThreshold = $this->getOrderThreshold();
 
@@ -48,7 +50,7 @@ class KoalityCollector_OrdersByHour extends KoalityCollector_BaseCollector
      *
      * @return int
      */
-    private function getOrderThreshold()
+    private function getUpdateablePluginsThreshold()
     {
         $config = $this->config;
 
@@ -75,15 +77,28 @@ class KoalityCollector_OrdersByHour extends KoalityCollector_BaseCollector
      * Return the number of orders that were processed in the last one hour.
      *
      * @return int
+     *
+     * @throws Exception
      */
-    private function getOrderCount()
+    private function getUpdatablePlugins()
     {
-        $intervalInHours = 1;
-        $date = date('Y-m-d H:i:s', strtotime('-' . $intervalInHours . ' hour'));
-        $query = 'select count(*) from s_order where ordertime > "' . $date . '" and status = 0;';
+        $updateContext = $this->getPluginContext(self::CONTEXT_PLUGIN_UPDATE);
 
-        $orderCount = $this->findOneBy($query);
+        $plugins = $updateContext->getPlugins();
 
-        return (int)$orderCount;
+        foreach ($plugins as $plugin) {
+            if ($plugin->isActive()) {
+                var_dump($plugin->getTechnicalName());
+                var_dump($plugin->getAvailableVersion());
+                var_dump($plugin->getVersion());
+            }
+        }
+    }
+
+    private function refreshPlugins()
+    {
+        /** @var \Shopware\Bundle\PluginInstallerBundle\Service\InstallerService $pluginManager */
+        $pluginManager = Shopware()->Container()->get('shopware_plugininstaller.plugin_manager');
+        $pluginManager->refreshPluginList();
     }
 }

@@ -39,11 +39,11 @@ class Shopware_Controllers_Frontend_Health extends Enlight_Controller_Action
 
             $formatter = new KoalityFormatter_KoalityFormatter();
 
-            foreach($results as $result) {
+            foreach ($results as $result) {
                 $formatter->addResult($result);
             }
 
-            $formattedResults =  $formatter->getFormattedResults();
+            $formattedResults = $formatter->getFormattedResults();
 
             echo json_encode($formattedResults, JSON_PRETTY_PRINT);
             die;
@@ -64,6 +64,8 @@ class Shopware_Controllers_Frontend_Health extends Enlight_Controller_Action
         $modelManager = $this->getModelManager();
 
         $this->collectors[] = new KoalityCollector_OrdersByHour($this->config, $modelManager);
+        $this->collectors[] = new KoalityCollector_ActiveProducts($this->config, $modelManager);
+        $this->collectors[] = new KoalityCollector_UpdatablePlugins($this->config, $modelManager);
     }
 
     /**
@@ -87,7 +89,12 @@ class Shopware_Controllers_Frontend_Health extends Enlight_Controller_Action
     {
         $results = [];
         foreach ($this->collectors as $collector) {
-            $results[] = $collector->validate();
+            $result = $collector->validate();
+            if ($result instanceof KoalityFormatter_Result) {
+                $results[] = $result;
+            } else {
+                // @todo handle collectors that do not return a KoalityFormatter_Result
+            }
         }
 
         return $results;

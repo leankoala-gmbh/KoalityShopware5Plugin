@@ -1,4 +1,4 @@
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/leankoala-gmbh/KoalityShopware5Plugin/badges/quality-score.png?b=develop)](https://scrutinizer-ci.com/g/leankoala-gmbh/KoalityShopware5Plugin/?branch=develop)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/leankoala-gmbh/KoalityShopware5Plugin/badges/quality-score.png?b=main)](https://scrutinizer-ci.com/g/leankoala-gmbh/KoalityShopware5Plugin/?branch=develop)
 
 # koality.io Shopware 5 Plugin
 
@@ -19,7 +19,10 @@ The following metrics are implemented yet:
 - **Minimum number of active products** - this check fails if there are not enough active products in the should. This will help find import errors.
 
 
-- **Maximum number products without image** - this check fails if there are too many products that have no review image
+- **Maximum number products without an image** - this check fails if there are too many products that have no review image
+
+
+- **Maximum number plugins that need to be updated** - this check fails if there are too many plugins that need an update
 
 
 ## How the plugin works

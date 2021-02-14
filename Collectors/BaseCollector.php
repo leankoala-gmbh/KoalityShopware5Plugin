@@ -175,44 +175,6 @@ abstract class KoalityCollector_BaseCollector implements KoalityCollector_Collec
     }
 
     /**
-     * Return a valid context for the plugin view service.
-     *
-     * @param string $contextType
-     *
-     * @return BaseRequest
-     *
-     * @throws Exception
-     */
-    protected function getPluginContext($contextType = self::CONTEXT_PLUGIN_LISTING)
-    {
-        switch ($contextType) {
-            case self::CONTEXT_PLUGIN_LISTING:
-                return new ListingRequest($this->getShopLocale(), $this->getShopLocale(), null, null, [], []);
-            case self::CONTEXT_PLUGIN_UPDATE:
-                $plugins = $this->getPlugins();
-                return new UpdateListingRequest($this->getShopLocale(), $this->getShopLocale(), null, $plugins);
-        }
-
-        throw new \Exception('The given context type "' . $contextType . '" is not known.');
-    }
-
-    /**
-     * Return a list of plugins.
-     *
-     * This list contains all plugins no matter if they are active or installed.
-     *
-     * @return PluginStruct[]
-     *
-     * @throws Exception
-     */
-    protected function getPlugins()
-    {
-        /** @var PluginViewService $pluginService */
-        $pluginService = Shopware()->Container()->get('shopware_plugininstaller.plugin_service_view');
-        return $pluginService->getLocalListing($this->getPluginContext());
-    }
-
-    /**
      * This function return a threshold from the configuration.
      *
      * If the value is not set in the config the fallback value is taken. If this is also not set
@@ -228,7 +190,7 @@ abstract class KoalityCollector_BaseCollector implements KoalityCollector_Collec
     protected function getThreshold($key, $fallbackValue = null)
     {
         if (array_key_exists($key, $this->config)) {
-            return $this[$key];
+            return (int)$this->config[$key];
         } else {
             if (!is_null($fallbackValue)) {
                 return $fallbackValue;

@@ -1,5 +1,8 @@
 <?php
 
+use Shopware\Bundle\PluginInstallerBundle\Context\UpdateListingRequest;
+use Shopware\Bundle\PluginInstallerBundle\Struct\UpdateResultStruct;
+
 /**
  * Class UpdatablePlugins
  *
@@ -23,16 +26,29 @@ class KoalityCollector_UpdatablePlugins extends KoalityCollector_BaseCollector
      * Returns the plugins that need to be updated.
      *
      * @inheritDoc
-     *
-     * @throws KoalityCollector_NotImplementedException
      */
     protected function getCurrentValue()
     {
-        /**
-         * This function must return an array like ['TechnicalName1', 'TechnicalName2']
-         *
-         * return ['Plugin1', 'Plugin2']
-         */
-        throw new KoalityCollector_NotImplementedException('This collector is not implemented yet.');
+        $container = Shopware()->Container();
+
+        $version = $this->getShopwareVersion();
+
+        $plugins = $container->get('shopware_plugininstaller.plugin_service_local')->getPluginsForUpdateCheck();
+        $domain = $container->get('shopware_plugininstaller.account_manager_service')->getDomain();
+        $service = $container->get('shopware_plugininstaller.plugin_service_view');
+
+        $request = new UpdateListingRequest('', $version, $domain, $plugins);
+        /** @var UpdateResultStruct $updates */
+
+        $updates = $service->getUpdates($request);
+        $plugins = $updates->getPlugins();
+
+        $updatablePlugins = [];
+
+        foreach ($plugins as $plugin) {
+            $updatablePlugins[] = $plugin->getTechnicalName();
+        }
+
+        return $updatablePlugins;
     }
 }

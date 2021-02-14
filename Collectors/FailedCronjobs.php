@@ -26,6 +26,6 @@ class KoalityCollector_FailedCronjobs extends KoalityCollector_BaseCollector
      */
     protected function getCurrentValue()
     {
-        throw new KoalityCollector_NotImplementedException('This collector is not implemented yet');
+        throw new KoalityCollector_NotImplementedException('This collector is not implemented yet.');
     }
 }

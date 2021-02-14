@@ -20,6 +20,8 @@ class KoalityCollector_ImagelessProducts extends KoalityCollector_BaseCollector
     protected $resultUnit = 'product';
 
     /**
+     * Returns the number of products without images.
+     *
      * @inheritDoc
      */
     protected function getCurrentValue()

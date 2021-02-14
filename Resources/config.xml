@@ -85,6 +85,17 @@
                 backend.
             </description>
         </element>
+
+        <element type="number">
+            <name>activeProducts</name>
+            <label lang="de">Anzahl aktiver Produkte</label>
+            <label lang="en">Minimal number of orders per hour</label>
+            <description lang="de">
+                Dies ist die minimale Anzahl an Produkten, die im Shop verfügbar sein muss.
+            </description>
+            <description lang="en">
+            </description>
+        </element>
     </elements>
 
 </config>

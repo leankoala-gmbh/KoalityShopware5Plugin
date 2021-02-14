@@ -65,7 +65,11 @@ class Shopware_Controllers_Frontend_Health extends Enlight_Controller_Action
 
         $this->collectors[] = new KoalityCollector_OrdersByHour($this->config, $modelManager);
         $this->collectors[] = new KoalityCollector_ActiveProducts($this->config, $modelManager);
-        // $this->collectors[] = new KoalityCollector_UpdatablePlugins($this->config, $modelManager);
+        $this->collectors[] = new KoalityCollector_ImagelessProducts($this->config, $modelManager);
+
+        $this->collectors[] = new KoalityCollector_FailedCronjobs($this->config, $modelManager);
+        $this->collectors[] = new KoalityCollector_VisitorsPerHour($this->config, $modelManager);
+        $this->collectors[] = new KoalityCollector_UpdatablePlugins($this->config, $modelManager);
     }
 
     /**
@@ -89,7 +93,11 @@ class Shopware_Controllers_Frontend_Health extends Enlight_Controller_Action
     {
         $results = [];
         foreach ($this->collectors as $collector) {
-            $result = $collector->validate();
+            try {
+                $result = $collector->validate();
+            } catch (KoalityCollector_NotImplementedException $e) {
+                // if a collector is not implemented yet just ignore it.
+            }
             if ($result instanceof KoalityFormatter_Result) {
                 $results[] = $result;
             } else {

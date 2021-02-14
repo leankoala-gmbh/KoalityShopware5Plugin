@@ -24,6 +24,21 @@ abstract class KoalityCollector_BaseCollector implements KoalityCollector_Collec
     const CONTEXT_PLUGIN_LISTING = 'listing';
     const CONTEXT_PLUGIN_UPDATE = 'update';
 
+    protected $configThresholdKey;
+    protected $configThresholdFallback = 0;
+
+    protected $messageSuccess;
+    protected $messageFailure;
+
+    protected $resultKey;
+    protected $resultUnit;
+
+    protected $resultPrecision = 2;
+    protected $resultLimitType = KoalityFormatter_Result::LIMIT_TYPE_MAX;
+    protected $resultType = KoalityFormatter_Result::TYPE_TIME_SERIES_NUMERIC;
+
+    protected $resultDetailKey = 'details';
+
     /**
      * @var ModelManager
      */
@@ -44,6 +59,48 @@ abstract class KoalityCollector_BaseCollector implements KoalityCollector_Collec
     {
         $this->modelManager = $modelManager;
         $this->config = $config;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function validate()
+    {
+        $threshold = $this->getThreshold($this->configThresholdKey, $this->configThresholdFallback);
+        $currentValue = $this->getCurrentValue();
+
+        $valueDetails = false;
+        if (is_array($currentValue)) {
+            $valueDetails = $currentValue;
+            $currentValue = count($currentValue);
+        }
+
+        if ($currentValue < $threshold) {
+            $orderResult = new KoalityFormatter_Result(KoalityFormatter_Result::STATUS_FAIL, $this->resultKey, $this->messageFailure);
+        } else {
+            $orderResult = new KoalityFormatter_Result(KoalityFormatter_Result::STATUS_PASS, $this->resultKey, $this->messageSuccess);
+        }
+
+        if ($valueDetails) {
+            $orderResult->addAttribute($this->resultDetailKey, $valueDetails);
+        }
+
+        $orderResult->setLimit($threshold);
+        $orderResult->setObservedValue($currentValue);
+        $orderResult->setObservedValuePrecision($this->resultPrecision);
+        $orderResult->setObservedValueUnit($this->resultUnit);
+        $orderResult->setLimitType($this->resultLimitType);
+        $orderResult->setType($this->resultType);
+
+        return $orderResult;
+    }
+
+    /**
+     * @return mixed
+     */
+    protected function getCurrentValue()
+    {
+        return null;
     }
 
     /**
@@ -153,5 +210,31 @@ abstract class KoalityCollector_BaseCollector implements KoalityCollector_Collec
         /** @var PluginViewService $pluginService */
         $pluginService = Shopware()->Container()->get('shopware_plugininstaller.plugin_service_view');
         return $pluginService->getLocalListing($this->getPluginContext());
+    }
+
+    /**
+     * This function return a threshold from the configuration.
+     *
+     * If the value is not set in the config the fallback value is taken. If this is also not set
+     * a RuntimeException is thrown.
+     *
+     * @param string $key
+     * @param null|int $fallbackValue
+     *
+     * @return int
+     *
+     * @throws RuntimeException
+     */
+    protected function getThreshold($key, $fallbackValue = null)
+    {
+        if (array_key_exists($key, $this->config)) {
+            return $this[$key];
+        } else {
+            if (!is_null($fallbackValue)) {
+                return $fallbackValue;
+            } else {
+                throw new RuntimeException('No configuration or fallback value found for key ' . $key . '.');
+            }
+        }
     }
 }

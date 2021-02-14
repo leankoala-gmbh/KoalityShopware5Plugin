@@ -19,36 +19,20 @@ class KoalityCollector_OrdersByHour extends KoalityCollector_BaseCollector
     const KEY_RUSH_HOUR_BEGIN = 'rushHourBegin';
     const KEY_RUSH_HOUR_END = 'rushHourEnd';
 
-    /**
-     * @inheritDoc
-     */
-    public function validate()
-    {
-        $orderCount = $this->getOrderCount();
-        $orderThreshold = $this->getOrderThreshold();
+    protected $messageSuccess = 'There were enough orders within the last hour.';
+    protected $messageFailure = 'There were too few orders within the last hour.';
 
-        if ($orderCount < $orderThreshold) {
-            $orderResult = new KoalityFormatter_Result(KoalityFormatter_Result::STATUS_FAIL, KoalityFormatter_Result::KEY_ORDERS_TOO_FEW, 'There were too few orders within the last hour.');
-        } else {
-            $orderResult = new KoalityFormatter_Result(KoalityFormatter_Result::STATUS_PASS, KoalityFormatter_Result::KEY_ORDERS_TOO_FEW, 'There were enough orders within the last hour.');
-        }
+    protected $resultKey = KoalityFormatter_Result::KEY_ORDERS_TOO_FEW;
+    protected $resultLimitType = KoalityFormatter_Result::LIMIT_TYPE_MIN;
 
-        $orderResult->setLimit($orderThreshold);
-        $orderResult->setObservedValue($orderCount);
-        $orderResult->setObservedValuePrecision(2);
-        $orderResult->setObservedValueUnit('orders');
-        $orderResult->setLimitType(KoalityFormatter_Result::LIMIT_TYPE_MIN);
-        $orderResult->setType(KoalityFormatter_Result::TYPE_TIME_SERIES_NUMERIC);
-
-        return $orderResult;
-    }
+    protected $resultUnit = 'order';
 
     /**
      * Return the sales threshold depending on the current time.
      *
-     * @return int
+     * @inheritDoc
      */
-    private function getOrderThreshold()
+    protected function getThreshold($key, $fallbackValue = null)
     {
         $config = $this->config;
 
@@ -76,7 +60,7 @@ class KoalityCollector_OrdersByHour extends KoalityCollector_BaseCollector
      *
      * @return int
      */
-    private function getOrderCount()
+    protected function getCurrentValue()
     {
         $intervalInHours = 1;
         $date = date('Y-m-d H:i:s', strtotime('-' . $intervalInHours . ' hour'));

@@ -11,7 +11,7 @@
  * @author Nils Langner <nils.langner@leankoala.com>
  * created 2021-02-12
  */
-class KoalityCollector_OrdersByHour extends KoalityCollector_BaseCollector
+class KoalityCollector_OrdersPerHour extends KoalityCollector_BaseCollector
 {
     const KEY_ORDERS_PER_RUSHHOUR = 'ordersPerHourRushHour';
     const KEY_ORDERS_NORMAL = 'ordersPerHourNormal';

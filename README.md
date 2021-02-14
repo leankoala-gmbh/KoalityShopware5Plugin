@@ -1,4 +1,4 @@
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/leankoala-gmbh/KoalityShopwarePlugin/badges/quality-score.png?b=develop)](https://scrutinizer-ci.com/g/leankoala-gmbh/KoalityShopwarePlugin/?branch=develop)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/leankoala-gmbh/KoalityShopware5Plugin/badges/quality-score.png?b=develop)](https://scrutinizer-ci.com/g/leankoala-gmbh/KoalityShopware5Plugin/?branch=develop)
 
 # koality.io Shopware 5 Plugin
 

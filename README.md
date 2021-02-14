@@ -19,6 +19,9 @@ The following metrics are implemented yet:
 - **Minimum number of active products** - this check fails if there are not enough active products in the should. This will help find import errors.
 
 
+- **Maximum number products without image** - this check fails if there are too many products that have no review image
+
+
 ## How the plugin works
 
 The plugin provides a JSON endpoint for the Shopware storefront that is secured via a secret token. The endpoint returns the health status of the shop. The health status is a mix of business metrics like "orders per hour" or server metrics like "space left on device".
@@ -29,15 +32,6 @@ The plugin provides a JSON endpoint for the Shopware storefront that is secured 
     "status": "fail",
     "output": "Some Shopware 5 health metrics failed: ",
     "checks": {
-        "carts.open.too_many": {
-            "status": "fail",
-            "output": "There are too many open carts at the moment.",
-            "limit": 30,
-            "limitType": "max",
-            "observedValue": 60,
-            "observedUnit": "carts",
-            "metricType": "time_series_numeric"
-        },
         "products.active": {
             "status": "pass",
             "output": "There are enough active products in your shop.",

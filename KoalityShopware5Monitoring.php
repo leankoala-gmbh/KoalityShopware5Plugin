@@ -1,6 +1,6 @@
 <?php
 
-namespace KoalityMonitoring;
+namespace KoalityShopware5Monitoring;
 
 use Shopware\Components\Plugin;
 use Shopware\Components\Plugin\Context\InstallContext;

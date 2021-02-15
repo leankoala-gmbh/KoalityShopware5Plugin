@@ -5,11 +5,13 @@
     <label lang="en">KoalityMonitoring</label>
     <version>1.0.0</version>
     <copyright>(c) by Leankoala GmbH</copyright>
-    <license>proprietary</license>
+    <license>MIT</license>
     <link>https://www.koality.io</link>
     <author>Leankoala GmbH</author>
 
     <compatibility minVersion="5.2.0" />
+    <description lang="de">Das E-Commerce-Monitoring-Plugin für Shopware 5 verbindet koality.io mit dem Shopsystem.</description>
+    <description lang="en">The e-commerce monitoring plugin for Shopware connects koality.io with the store system.</description>
 
     <changelog version="1.0.0">
         <changes lang="de">Erste Veröffentlichung</changes>

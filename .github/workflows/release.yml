@@ -27,22 +27,22 @@ jobs:
                 working-directory: .
                 run: |
                     mkdir -p /tmp/plugin/KoalityMonitoring
-                    mv * /tmp/plugin/KoalityMonitoring
+                    mv * /tmp/plugin/KoalityShopware5Monitoring
 
             -   name: Remove GIT files
                 working-directory: /tmp/plugin
                 run: |
-                    rm -rf KoalityMonitoring/.git KoalityMonitoring/.github
+                    rm -rf KoalityShopware5Monitoring/.git KoalityShopware5Monitoring/.github
 
             -   name: Create ZIP file
                 working-directory: /tmp/plugin
                 run: |
-                    zip -r KoalityMonitoring.zip .
+                    zip -r KoalityShopware5Monitoring.zip .
 
             -   name: Upload binaries to release
                 uses: svenstaro/upload-release-action@v2
                 with:
                     repo_token: ${{ secrets.GITHUB_TOKEN }}
-                    file: /tmp/plugin/KoalityMonitoring.zip
+                    file: /tmp/plugin/KoalityShopware5Monitoring.zip
                     asset_name: ${{ matrix.asset_name }}
                     tag: ${{ github.ref }}

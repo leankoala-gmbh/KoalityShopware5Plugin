@@ -99,14 +99,13 @@ class Shopware_Controllers_Frontend_Health extends Enlight_Controller_Action
         foreach ($this->collectors as $collector) {
             try {
                 $result = $collector->validate();
+                if ($result instanceof KoalityFormatter_Result) {
+                    $results[] = $result;
+                } else {
+                    // @todo handle collectors that do not return a KoalityFormatter_Result
+                }
             } catch (\Exception $e) {
-                var_dump('hier');
-                $results[]  = new KoalityFormatter_Error(get_class($collector), $e->getMessage());
-            }
-            if ($result instanceof KoalityFormatter_Result) {
-                $results[] = $result;
-            } else {
-                // @todo handle collectors that do not return a KoalityFormatter_Result
+                $results[] = new KoalityFormatter_Error(get_class($collector), $e->getMessage());
             }
         }
 

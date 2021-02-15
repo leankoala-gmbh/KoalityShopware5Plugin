@@ -26,7 +26,7 @@ jobs:
             -   name: Create plugin directory
                 working-directory: .
                 run: |
-                    mkdir -p /tmp/plugin/KoalityMonitoring
+                    mkdir -p /tmp/plugin/KoalityShopware5Monitoring
                     mv * /tmp/plugin/KoalityShopware5Monitoring
 
             -   name: Remove GIT files

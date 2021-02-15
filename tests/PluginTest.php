@@ -1,8 +1,7 @@
 <?php
 
-namespace KoalityMonitoring\Tests;
+namespace KoalityShopware5Monitoring\Tests;
 
-use KoalityMonitoring\KoalityShopware5Monitoring as Plugin;
 use Shopware\Components\Test\Plugin\TestCase;
 
 class PluginTest extends TestCase

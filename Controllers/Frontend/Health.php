@@ -1,6 +1,6 @@
 <?php
 
-use KoalityMonitoring\KoalityShopware5Monitoring;
+use KoalityShopware5Monitoring\KoalityShopware5Monitoring;
 use Shopware\Components\Plugin\ConfigReader;
 
 Shopware()->Application()->Loader()->registerNamespace('KoalityCollector', __DIR__ . '/../../Collectors/');

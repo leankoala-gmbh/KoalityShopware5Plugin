@@ -1,7 +1,6 @@
 <?php
 
 use Shopware\Components\Model\ModelManager;
-use Shopware\Models\Shop\Shop;
 
 /**
  * Class Koality_BaseCollector

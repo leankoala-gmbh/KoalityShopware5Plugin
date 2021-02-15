@@ -2,10 +2,10 @@
 <menu xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/shopware/shopware/5.2/engine/Shopware/Components/Plugin/schema/menu.xsd">
     <entries>
         <entry>
-            <name>KoalityMonitoring</name>
+            <name>KoalityShopware5Monitoring</name>
             <label lang="en">KoalityMonitoring</label>
             <label lang="de">KoalityMonitoring</label>
-            <controller>KoalityMonitoring</controller>
+            <controller>KoalityShopware5Monitoring</controller>
             <action>index</action>
             <class>sprite-application-block</class>
             <parent identifiedBy="controller">Marketing</parent>

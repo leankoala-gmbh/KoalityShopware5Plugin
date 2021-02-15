@@ -1,6 +1,6 @@
 <?php
 
-namespace KoalityMonitoring\Subscriber;
+namespace KoalityShopware5Monitoring\Subscriber;
 
 use Enlight\Event\SubscriberInterface;
 

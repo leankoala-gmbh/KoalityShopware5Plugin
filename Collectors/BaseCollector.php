@@ -131,7 +131,11 @@ abstract class KoalityCollector_BaseCollector implements KoalityCollector_Collec
      */
     protected function getShopwareVersion()
     {
-        return Shopware()->Container()->getParameter('shopware.release.version');
+        try {
+            return Shopware()->Container()->getParameter('shopware.release.version');
+        } catch (InvalidArgumentException $e) {
+            return Shopware()->Container()->get('config')->offsetGet('Version');
+        }
     }
 
     /**

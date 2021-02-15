@@ -17,7 +17,7 @@ class KoalityCollector_ImagelessProducts extends KoalityCollector_BaseCollector
 
     protected $resultKey = 'products.imageless';
 
-    protected $resultUnit = 'product';
+    protected $resultUnit = 'products';
 
     /**
      * Returns the number of products without images.

@@ -22,7 +22,7 @@ class KoalityCollector_OrdersPerHour extends KoalityCollector_BaseCollector
     protected $resultKey = KoalityFormatter_Result::KEY_ORDERS_TOO_FEW;
     protected $resultLimitType = KoalityFormatter_Result::LIMIT_TYPE_MIN;
 
-    protected $resultUnit = 'order';
+    protected $resultUnit = 'orders';
 
     /**
      * Return the sales threshold depending on the current time.

@@ -34,7 +34,7 @@ class KoalityFormatter_Error
     /**
      * @return string
      */
-    public function getCollector(): string
+    public function getCollector()
     {
         return $this->collector;
     }
@@ -42,7 +42,7 @@ class KoalityFormatter_Error
     /**
      * @return string
      */
-    public function getMessage(): string
+    public function getMessage()
     {
         return $this->message;
     }

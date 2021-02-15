@@ -97,6 +97,8 @@ class Shopware_Controllers_Frontend_Health extends Enlight_Controller_Action
                 $result = $collector->validate();
             } catch (KoalityCollector_NotImplementedException $e) {
                 // if a collector is not implemented yet just ignore it.
+            } catch (\Exception $e) {
+                // do not fail on error
             }
             if ($result instanceof KoalityFormatter_Result) {
                 $results[] = $result;

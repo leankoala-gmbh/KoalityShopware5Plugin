@@ -58,4 +58,11 @@ class KoalityMonitoring extends Plugin
         parent::build($container);
     }
 
+    /**
+     * @inheritDoc
+     */
+    public function boot()
+    {
+        parent::boot();
+    }
 }

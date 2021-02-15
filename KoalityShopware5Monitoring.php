@@ -20,7 +20,7 @@ class KoalityShopware5Monitoring extends Plugin
 
     const CONFIG_KEY_API_KEY = 'apiKey';
 
-    const PLUGIN_NAME = 'KoalityMonitoring';
+    const PLUGIN_NAME = 'KoalityShopware5Monitoring';
 
     /**
      * @inheritDoc

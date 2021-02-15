@@ -46,12 +46,10 @@
         <element type="boolean">
             <name>includeWeekends</name>
             <label lang="de">Wochenende einbeziehen</label>
-            <label lang="en">Minimal number of orders per hour</label>
-            <description lang="de">Dieser geheime Schlüssel muss in der Konfiguration in koality.io für dieses Plugin
-                eingetragen werden.
+            <label lang="en">Include weekend</label>
+            <description lang="de">Falls am Wochenende auch die Hauptverkaufszeiten gelten muss dieser Check aktiviert werden
             </description>
-            <description lang="en">The API key must be added to the koality.io configuration in the koality.io
-                backend.
+            <description lang="en">If the peak sales hours also apply on weekends, this check must be activated
             </description>
         </element>
 
@@ -59,13 +57,7 @@
             <name>ordersPerHourRushHour</name>
             <label lang="de">Mindestanzahl an Bestellungen pro Stunde (Hauptverkaufszeit)</label>
             <label lang="en">Minimal number of orders per hour</label>
-            <value>1</value>
-            <description lang="de">Dieser geheime Schlüssel muss in der Konfiguration in koality.io für dieses Plugin
-                eingetragen werden.
-            </description>
-            <description lang="en">The API key must be added to the koality.io configuration in the koality.io
-                backend.
-            </description>
+            <value>0</value>
             <options>
                 <minValue>0</minValue>
             </options>
@@ -76,12 +68,6 @@
             <label lang="de">Mindestanzahl an Bestellungen außerhalb der Hauptverkaufszeit</label>
             <label lang="en">Minimal number of orders outsite the rush hour.</label>
             <value>1</value>
-            <description lang="de">Dieser geheime Schlüssel muss in der Konfiguration in koality.io für dieses Plugin
-                eingetragen werden.
-            </description>
-            <description lang="en">The API key must be added to the koality.io configuration in the koality.io
-                backend.
-            </description>
             <options>
                 <minValue>0</minValue>
             </options>
@@ -92,21 +78,20 @@
             <label lang="de">Minimale Anzahl aktiver Produkte</label>
             <label lang="en">Minimal number of orders per hour</label>
             <description lang="de">
-                Dies ist die minimale Anzahl an Produkten, die im Shop verfügbar sein muss.
+                Dies ist die minimale Anzahl an Produkten, die im Shop verfügbar sein muss. Diese Prüfung hilft Fehler beim Import zu verhindern.
             </description>
             <description lang="en">
+                This is the minimum number of products that must be available in the store. This check helps to prevent errors during import.
             </description>
+            <options>
+                <minValue>0</minValue>
+            </options>
         </element>
 
         <element type="number">
             <name>updatablePlugins</name>
             <label lang="de">Maximale Anzahl updatefähiger Plugins</label>
-            <label lang="en">Minimal number of orders per hour</label>
-            <description lang="de">
-                Dies ist die minimale Anzahl an Produkten, die im Shop verfügbar sein muss.
-            </description>
-            <description lang="en">
-            </description>
+            <label lang="en">Maximum number of updatable plugins</label>
             <options>
                 <minValue>0</minValue>
             </options>
@@ -115,12 +100,7 @@
         <element type="number">
             <name>imagelessProducts</name>
             <label lang="de">Maximale Anzahl an Produkten ohne Bilder</label>
-            <label lang="en">Minimal number of orders per hour</label>
-            <description lang="de">
-                Dies ist die minimale Anzahl an Produkten, die im Shop verfügbar sein muss.
-            </description>
-            <description lang="en">
-            </description>
+            <label lang="en">Maximum number of products without images</label>
             <options>
                 <minValue>0</minValue>
             </options>

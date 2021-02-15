@@ -7,9 +7,9 @@ use Shopware\Components\Plugin\Context\InstallContext;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 /**
- * Class KoalityMonitoring
+ * Class KoalityShopware5Monitoring
  *
- * @package KoalityMonitoring
+ * @package KoalityShopware5Monitoring
  *
  * @author Nils Langner <nils.langner@leankoala.com>
  * created 2021-02-10
@@ -56,13 +56,5 @@ class KoalityShopware5Monitoring extends Plugin
     {
         $container->setParameter('koality_monitoring.plugin_dir', $this->getPath());
         parent::build($container);
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function boot()
-    {
-        parent::boot();
     }
 }

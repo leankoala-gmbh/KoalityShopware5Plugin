@@ -1,6 +1,6 @@
 <?php
 
-use KoalityMonitoring\KoalityMonitoring;
+use KoalityMonitoring\KoalityShopware5Monitoring;
 use Shopware\Components\Plugin\ConfigReader;
 
 Shopware()->Application()->Loader()->registerNamespace('KoalityCollector', __DIR__ . '/../../Collectors/');
@@ -81,7 +81,7 @@ class Shopware_Controllers_Frontend_Health extends Enlight_Controller_Action
     {
         /** @var ConfigReader $configReader */
         $configReader = $this->get('shopware.plugin.config_reader');
-        $this->config = $configReader->getByPluginName(KoalityMonitoring::PLUGIN_NAME);
+        $this->config = $configReader->getByPluginName(KoalityShopware5Monitoring::PLUGIN_NAME);
     }
 
     /**
@@ -121,11 +121,11 @@ class Shopware_Controllers_Frontend_Health extends Enlight_Controller_Action
             throw new \RuntimeException('No apiKey as request parameter set.');
         }
 
-        if (!array_key_exists(KoalityMonitoring::CONFIG_KEY_API_KEY, $this->config)) {
+        if (!array_key_exists(KoalityShopware5Monitoring::CONFIG_KEY_API_KEY, $this->config)) {
             throw new \RuntimeException('No API key found in configuration');
         }
 
-        if ($this->config[KoalityMonitoring::CONFIG_KEY_API_KEY] != $requestApiKey) {
+        if ($this->config[KoalityShopware5Monitoring::CONFIG_KEY_API_KEY] != $requestApiKey) {
             throw new \RuntimeException('The given api key is not valid.');
         }
     }

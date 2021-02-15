@@ -14,7 +14,7 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
  * @author Nils Langner <nils.langner@leankoala.com>
  * created 2021-02-10
  */
-class KoalityMonitoring extends Plugin
+class KoalityShopware5Monitoring extends Plugin
 {
     const VERSION = '1.0.0';
 

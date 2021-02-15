@@ -2,7 +2,7 @@
 
 namespace KoalityMonitoring\Tests;
 
-use KoalityMonitoring\KoalityMonitoring as Plugin;
+use KoalityMonitoring\KoalityShopware5Monitoring as Plugin;
 use Shopware\Components\Test\Plugin\TestCase;
 
 class PluginTest extends TestCase

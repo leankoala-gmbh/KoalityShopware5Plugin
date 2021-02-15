@@ -4,8 +4,6 @@ namespace KoalityMonitoring;
 
 use Shopware\Components\Plugin;
 use Shopware\Components\Plugin\Context\InstallContext;
-use Shopware\Models\Shop\DetachedShop;
-use Shopware\Models\Shop\Shop;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 /**
@@ -27,28 +25,14 @@ class KoalityMonitoring extends Plugin
     /**
      * @inheritDoc
      */
-    public function __install(InstallContext $context)
+    public function install(InstallContext $context)
     {
         parent::install($context);
 
-        $shop = false;
-        if ($this->container->initialized('shop')) {
-            $shop = $this->container->get('shop');
-        }
-
-        if (!$shop) {
-            /** @var DetachedShop $shop */
-            $shop = $this->container->get('models')->getRepository(Shop::class)->getActiveDefault();
-        }
-
-        /** @var \Shopware\Models\Plugin\Plugin $plugin */
-        $plugin = Shopware()->Models()->getRepository(\Shopware\Models\Plugin\Plugin::class)->findOneBy(['name' => self::PLUGIN_NAME]);
-
-        /** @var Plugin\ConfigWriter $configWriter */
-        $configWriter = $this->container->get('shopware.plugin.config_writer');
-
-        $elements = [self::CONFIG_KEY_API_KEY =>  $this->createGuid()];
-        $configWriter->savePluginConfig($plugin, $elements, $shop);
+        $shop = Shopware()->Models()->getRepository('Shopware\Models\Shop\Shop')->findOneBy(array('default' => true));
+        $pluginManager = Shopware()->Container()->get('shopware.plugin_Manager');
+        $plugin = $pluginManager->getPluginByName(self::PLUGIN_NAME);
+        $pluginManager->saveConfigElement($plugin, self::CONFIG_KEY_API_KEY, $this->createGuid(), $shop);
     }
 
     /**

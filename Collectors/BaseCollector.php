@@ -1,10 +1,5 @@
 <?php
 
-use Shopware\Bundle\PluginInstallerBundle\Context\BaseRequest;
-use Shopware\Bundle\PluginInstallerBundle\Context\ListingRequest;
-use Shopware\Bundle\PluginInstallerBundle\Context\UpdateListingRequest;
-use Shopware\Bundle\PluginInstallerBundle\Service\PluginViewService;
-use Shopware\Bundle\PluginInstallerBundle\Struct\PluginStruct;
 use Shopware\Components\Model\ModelManager;
 use Shopware\Models\Shop\Shop;
 
@@ -23,6 +18,10 @@ abstract class KoalityCollector_BaseCollector implements KoalityCollector_Collec
 
     const CONTEXT_PLUGIN_LISTING = 'listing';
     const CONTEXT_PLUGIN_UPDATE = 'update';
+
+    const KEY_INCLUDE_WEEKENDS = 'includeWeekends';
+    const KEY_RUSH_HOUR_BEGIN = 'rushHourBegin';
+    const KEY_RUSH_HOUR_END = 'rushHourEnd';
 
     protected $configThresholdKey;
     protected $configThresholdFallback = 0;
@@ -198,5 +197,37 @@ abstract class KoalityCollector_BaseCollector implements KoalityCollector_Collec
                 throw new RuntimeException('No configuration or fallback value found for key ' . $key . '.');
             }
         }
+    }
+
+
+    /**
+     * Return true if the current time is within the rush hour.
+     *
+     * The time interval is defined in the plugins configuration.
+     *
+     * @return bool
+     */
+    protected function isRushhour()
+    {
+        $config = $this->config;
+
+        $currentWeekDay = date('w');
+        $isWeekend = ($currentWeekDay == 0 || $currentWeekDay == 6);
+
+        $allowRushHour = !($isWeekend && !$config[self::KEY_INCLUDE_WEEKENDS]);
+
+        if ($allowRushHour && array_key_exists(self::KEY_RUSH_HOUR_BEGIN, $config) && array_key_exists(self::KEY_RUSH_HOUR_END, $config)) {
+            $beginHour = (int)substr($config[self::KEY_RUSH_HOUR_BEGIN], 11, 2) . substr($config[self::KEY_RUSH_HOUR_BEGIN], 14, 2);
+            $endHour = (int)substr($config[self::KEY_RUSH_HOUR_END], 11, 2) . substr($config[self::KEY_RUSH_HOUR_END], 14, 2);
+
+            $currentTime = (int)date('Hi');
+
+            if ($currentTime < $endHour && $currentTime > $beginHour) {
+                return true;
+            }
+        }
+
+        return false;
+
     }
 }

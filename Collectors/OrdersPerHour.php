@@ -15,9 +15,6 @@ class KoalityCollector_OrdersPerHour extends KoalityCollector_BaseCollector
 {
     const KEY_ORDERS_PER_RUSHHOUR = 'ordersPerHourRushHour';
     const KEY_ORDERS_NORMAL = 'ordersPerHourNormal';
-    const KEY_INCLUDE_WEEKENDS = 'includeWeekends';
-    const KEY_RUSH_HOUR_BEGIN = 'rushHourBegin';
-    const KEY_RUSH_HOUR_END = 'rushHourEnd';
 
     protected $messageSuccess = 'There were enough orders within the last hour.';
     protected $messageFailure = 'There were too few orders within the last hour.';
@@ -36,23 +33,11 @@ class KoalityCollector_OrdersPerHour extends KoalityCollector_BaseCollector
     {
         $config = $this->config;
 
-        $currentWeekDay = date('w');
-        $isWeekend = ($currentWeekDay == 0 || $currentWeekDay == 6);
-
-        $allowRushHour = !($isWeekend && !$config[self::KEY_INCLUDE_WEEKENDS]);
-
-        if ($allowRushHour && array_key_exists(self::KEY_RUSH_HOUR_BEGIN, $config) && array_key_exists(self::KEY_RUSH_HOUR_END, $config)) {
-            $beginHour = (int)substr($config[self::KEY_RUSH_HOUR_BEGIN], 11, 2) . substr($config[self::KEY_RUSH_HOUR_BEGIN], 14, 2);
-            $endHour = (int)substr($config[self::KEY_RUSH_HOUR_END], 11, 2) . substr($config[self::KEY_RUSH_HOUR_END], 14, 2);
-
-            $currentTime = (int)date('Hi');
-
-            if ($currentTime < $endHour && $currentTime > $beginHour) {
-                return (int)$config[self::KEY_ORDERS_PER_RUSHHOUR];
-            }
+        if ($this->isRushhour()) {
+            return (int)$config[self::KEY_ORDERS_PER_RUSHHOUR];
+        } else {
+            return (int)$config[self::KEY_ORDERS_NORMAL];
         }
-
-        return (int)$config[self::KEY_ORDERS_NORMAL];
     }
 
     /**

@@ -126,44 +126,6 @@ abstract class KoalityCollector_BaseCollector implements KoalityCollector_Collec
     }
 
     /**
-     * Return the default shop object.
-     *
-     * @return Shop
-     */
-    protected function getDefaultShop()
-    {
-        $shopRepo = Shopware()->Models()->getRepository(Shop::class);
-
-        /** @var Shop $shop */
-        $shop = $shopRepo->findOneBy(array('default' => 1));
-
-        return $shop;
-    }
-
-    /**
-     * Return the default shops locale.
-     *
-     * If the value is not set the fallback locale from the function argument is taken.
-     *
-     * @param string $fallbackLocale
-     * @return string
-     */
-    private function getShopLocale($fallbackLocale = self::LOCALE_DEFAULT)
-    {
-        $defaultShop = $this->getDefaultShop();
-
-        if (!is_null($defaultShop)) {
-            $shopLocale = $defaultShop->getLocale()->getLocale();
-        }
-
-        if (empty($shopLocale)) {
-            $shopLocale = $fallbackLocale;
-        }
-
-        return $shopLocale;
-    }
-
-    /**
      * Return the current Shopware version.
      *
      * @return string

@@ -21,6 +21,11 @@ class KoalityFormatter_KoalityFormatter
     private $results = [];
 
     /**
+     * @var KoalityFormatter_Error
+     */
+    private $errors = [];
+
+    /**
      * Add a new result.
      *
      * If the status of the result is "fail" the whole check will be marked as failed.
@@ -30,6 +35,11 @@ class KoalityFormatter_KoalityFormatter
     public function addResult(KoalityFormatter_Result $result)
     {
         $this->results[] = $result;
+    }
+
+    public function addError(KoalityFormatter_Error $error)
+    {
+        $this->errors[] = $error;
     }
 
     /**
@@ -90,6 +100,11 @@ class KoalityFormatter_KoalityFormatter
 
         $formattedResult['checks'] = $checks;
 
+        $errorBlock = $this->getErrorBlock();
+        if(count($errorBlock) > 0) {
+            $formattedResult['errors'] = $errorBlock;
+        }
+
         $formattedResult['info'] = $this->getInfoBlock();
 
         return $formattedResult;
@@ -109,6 +124,16 @@ class KoalityFormatter_KoalityFormatter
         } else {
             return 'Some Shopware 5 health metrics failed: ';
         }
+    }
+
+    private function getErrorBlock()
+    {
+        $block = [];
+        foreach ($this->errors as $error) {
+            /** @var KoalityFormatter_Error $error */
+            $block[] = ['collector' => $error->getCollector(), 'message' => $error->getMessage()];
+        }
+        return $block;
     }
 
     /**

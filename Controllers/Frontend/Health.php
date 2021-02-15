@@ -40,7 +40,11 @@ class Shopware_Controllers_Frontend_Health extends Enlight_Controller_Action
             $formatter = new KoalityFormatter_KoalityFormatter();
 
             foreach ($results as $result) {
-                $formatter->addResult($result);
+                if ($result instanceof KoalityFormatter_Result) {
+                    $formatter->addResult($result);
+                } elseif ($result instanceof KoalityFormatter_Error) {
+                    $formatter->addError($result);
+                }
             }
 
             $formattedResults = $formatter->getFormattedResults();
@@ -95,10 +99,9 @@ class Shopware_Controllers_Frontend_Health extends Enlight_Controller_Action
         foreach ($this->collectors as $collector) {
             try {
                 $result = $collector->validate();
-            } catch (KoalityCollector_NotImplementedException $e) {
-                // if a collector is not implemented yet just ignore it.
             } catch (\Exception $e) {
-                // do not fail on error
+                var_dump('hier');
+                $results[]  = new KoalityFormatter_Error(get_class($collector), $e->getMessage());
             }
             if ($result instanceof KoalityFormatter_Result) {
                 $results[] = $result;

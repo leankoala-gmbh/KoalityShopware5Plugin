@@ -73,10 +73,18 @@ abstract class KoalityCollector_BaseCollector implements KoalityCollector_Collec
             $currentValue = count($currentValue);
         }
 
-        if ($currentValue < $threshold) {
-            $orderResult = new KoalityFormatter_Result(KoalityFormatter_Result::STATUS_FAIL, $this->resultKey, $this->messageFailure);
-        } else {
-            $orderResult = new KoalityFormatter_Result(KoalityFormatter_Result::STATUS_PASS, $this->resultKey, $this->messageSuccess);
+        if ($this->resultLimitType == KoalityFormatter_Result::LIMIT_TYPE_MAX) {
+            if ($currentValue > $threshold) {
+                $orderResult = new KoalityFormatter_Result(KoalityFormatter_Result::STATUS_FAIL, $this->resultKey, $this->messageFailure);
+            } else {
+                $orderResult = new KoalityFormatter_Result(KoalityFormatter_Result::STATUS_PASS, $this->resultKey, $this->messageSuccess);
+            }
+        }else{
+            if ($currentValue < $threshold) {
+                $orderResult = new KoalityFormatter_Result(KoalityFormatter_Result::STATUS_FAIL, $this->resultKey, $this->messageFailure);
+            } else {
+                $orderResult = new KoalityFormatter_Result(KoalityFormatter_Result::STATUS_PASS, $this->resultKey, $this->messageSuccess);
+            }
         }
 
         if ($valueDetails) {

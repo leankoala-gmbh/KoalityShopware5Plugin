@@ -7,7 +7,6 @@
             <name>apiKey</name>
             <label lang="de">koality.io API-Schlüssel (privat)</label>
             <label lang="en">koality.io API key (private)</label>
-            <value>123</value>
             <description lang="de">Dieser geheime Schlüssel muss in der Konfiguration in koality.io für dieses Plugin
                 eingetragen werden.
             </description>
@@ -39,9 +38,6 @@
             </description>
             <description lang="en">The rush hour period is the time when they expect the most purchases from your online store.
             </description>
-            <options>
-                <minValue>0</minValue>
-            </options>
         </element>
 
         <element type="boolean">

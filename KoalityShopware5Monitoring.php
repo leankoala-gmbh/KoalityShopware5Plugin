@@ -4,6 +4,7 @@ namespace KoalityShopware5Monitoring;
 
 use Shopware\Components\Plugin;
 use Shopware\Components\Plugin\Context\InstallContext;
+use Shopware\Components\Plugin\Context\UninstallContext;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 /**
@@ -56,5 +57,14 @@ class KoalityShopware5Monitoring extends Plugin
     {
         $container->setParameter('koality_monitoring.plugin_dir', $this->getPath());
         parent::build($container);
+    }
+
+    /**
+     * Overwrite the clear cache process from parent
+     *
+     * @param Plugin\Context\UninstallContext $context
+     */
+    public function uninstall(UninstallContext $context)
+    {
     }
 }

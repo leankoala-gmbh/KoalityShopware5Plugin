@@ -49,7 +49,7 @@ class KoalityCollector_OrdersPerHour extends KoalityCollector_BaseCollector
     {
         $intervalInHours = 1;
         $date = date('Y-m-d H:i:s', strtotime('-' . $intervalInHours . ' hour'));
-        $query = 'select count(*) from s_order where ordertime > "' . $date . '" and status = 0;';
+        $query = 'select count(*) from s_order where ordertime > "' . $date . '" and status >= -1;';
 
         $orderCount = $this->findOneBy($query);
 

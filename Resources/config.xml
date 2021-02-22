@@ -90,20 +90,20 @@
             <name>updatablePlugins</name>
             <label lang="de">Maximale Anzahl updatefähiger Plugins</label>
             <label lang="en">Maximum number of updatable plugins</label>
+            <value>0</value>
             <options>
                 <minValue>0</minValue>
             </options>
-            <value>0</value>
         </element>
 
         <element type="number">
             <name>imagelessProducts</name>
             <label lang="de">Maximale Anzahl an Produkten ohne Bilder</label>
             <label lang="en">Maximum number of products without images</label>
+            <value>0</value>
             <options>
                 <minValue>0</minValue>
             </options>
-            <value>0</value>
         </element>
 
 

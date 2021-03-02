@@ -12,7 +12,7 @@ Shopware()->Application()->Loader()->registerNamespace('KoalityFormatter', __DIR
  * @author Nils Langner <nils.langner@leankoala.com>
  * created 2021-02-10
  */
-class Shopware_Controllers_Frontend_Health extends Enlight_Controller_Action
+class Shopware_Controllers_Frontend_KoalityHealth extends Enlight_Controller_Action
 {
     /**
      * @var KoalityCollector_Collector[]

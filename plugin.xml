@@ -17,4 +17,9 @@
         <changes lang="de">Erste Veröffentlichung</changes>
         <changes lang="en">Initial Release</changes>
     </changelog>
+
+    <changelog version="1.0.1">
+        <changes lang="de">Fixed service name</changes>
+        <changes lang="en">Fixed service name</changes>
+    </changelog>
 </plugin>

@@ -3,7 +3,7 @@
         xsi:noNamespaceSchemaLocation="../../../engine/Shopware/Components/Plugin/schema/plugin.xsd">
     <label lang="de">KoalityMonitoring</label>
     <label lang="en">KoalityMonitoring</label>
-    <version>1.0.0</version>
+    <version>1.0.1</version>
     <copyright>(c) by Leankoala GmbH</copyright>
     <license>MIT</license>
     <link>https://www.koality.io</link>

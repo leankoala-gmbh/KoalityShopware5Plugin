@@ -31,7 +31,7 @@ class KoalityShopware5Monitoring extends Plugin
         parent::install($context);
 
         $shop = Shopware()->Models()->getRepository('Shopware\Models\Shop\Shop')->findOneBy(array('default' => true));
-        $pluginManager = Shopware()->Container()->get('shopware.plugin_Manager');
+        $pluginManager = Shopware()->Container()->get('shopware.plugin_manager');
         $plugin = $pluginManager->getPluginByName(self::PLUGIN_NAME);
         $pluginManager->saveConfigElement($plugin, self::CONFIG_KEY_API_KEY, $this->createGuid(), $shop);
     }
